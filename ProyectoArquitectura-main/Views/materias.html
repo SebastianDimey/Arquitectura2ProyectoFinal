@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materias</title>
+  <link rel="stylesheet" href="../Styles/styleadmin.css" />
+ 
+</head>
+<body>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="materias.html">Materias</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Team</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Content</a></li>
+    <li><a href="#">Horario</a></li>
+    <li><a href="/logout">Salir</a></li>
+    <!-- Agregamos el enlace de logout -->
+  </ul>
+  <section class="container">
+    <header>Materias</header>
+    <form action="#" class="formulario">
+      <div class="input-box">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" readonly>
+      </div>
+      <div class="input-box">
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" readonly>
+      </div>
+      <div class="input-box">
+        <label for="username">Correo</label>
+        <input type="text" id="username" readonly>
+      </div>
+      <div class="input-box">
+        <label for="documento">Número de Documento</label>
+        <input type="text" id="documento" readonly>
+      </div>
+      <div class="input-box">
+        <label for="programa">Programa</label>
+        <input type="text" id="programa" readonly>
+      </div>
+      <div class="input-box">
+        <label for="corte_1">Corte #1</label>
+        <input type="text" id="corte_1" readonly>
+      </div>
+      <div class="input-box">
+        <label for="corte_2">Corte #2</label>
+        <input type="text" id="corte_2" readonly>
+      </div>
+      <div class="input-box">
+        <label for="corte_3">Corte #3</label>
+        <input type="text" id="corte_3" readonly>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    window.onload = function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/obtenerEstudianteSesion", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var estudiante = JSON.parse(xhr.responseText).estudiante;
+            mostrarEstudiante(estudiante);
+          } else {
+            alert("Error al obtener los detalles del estudiante");
+          }
+        }
+      };
+      xhr.send();
+    };
+
+    function mostrarEstudiante(estudiante) {
+      document.getElementById("nombre").value = estudiante.nombre;
+      document.getElementById("apellido").value = estudiante.apellido;
+      document.getElementById("username").value = estudiante.username;
+      document.getElementById("documento").value = estudiante.numero_documento;
+      document.getElementById("programa").value = estudiante.programa;
+      document.getElementById("corte_1").value = estudiante.corte_1 || "";
+      document.getElementById("corte_2").value = estudiante.corte_2 || "";
+      document.getElementById("corte_3").value = estudiante.corte_3 || "";
+    }
+  </script>
+</body>
+</html>

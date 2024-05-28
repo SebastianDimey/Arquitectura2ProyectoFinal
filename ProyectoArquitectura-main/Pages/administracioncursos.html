@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion de Cursos</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css">
+</head>
+<body>
+    <ul>
+        <li><a href="inicioadmin.html">Inicio</a></li>
+        <li><a href="#">Fechas Academicas</a></li>
+        <li><a href="#">Calendario Academico</a></li>
+        <li><a href="registroacademico.html">Registro Academico </a></li>
+        <li><a href="administracioncursos.html">Administracion de Cursos</a></li>
+        <li><a href="administracioncuentas.html">Administracion de Cuentas</a></li>
+    </ul>
+
+    <section class="container">
+        <header>Registro de curso</header>
+        <form action="#" class="formulario">
+            <div class="input-box">
+                <label>Id curso</label>
+                <input type="text" placeholder="curso id">
+            </div>
+            <div class="input-box">
+                <label>Nombre Curso</label>
+                <input type="text" placeholder="Escriba el nombre del curso" required>
+            </div>
+
+            <div class="input-box">
+                <label>Docente a cargo</label>
+                <div class="select-box">
+                    <select>
+                        <option hidden>Docente a cargo</option>
+                        <option>Cierra</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Creditos</label>
+                    <input type="number" placeholder="Esgrese el numero de creditos" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Programa</label>
+                    <div class="select-box">
+                        <select>
+                            <option hidden>Programa</option>
+                            <option>Administracion de empresas</option>
+                            <option>Biologia</option>
+                            <option>Cine</option>
+                            <option>comunicacion social y periodismo</option>
+                            <option>Contaduria publica</option>
+                            <option>Creacion literaria</option>
+                            <option>Derecho</option>
+                            <option>Economia</option>
+                            <option>Estudios musicales</option>
+                            <option>Ingenieria de sistemas</option>
+                            <option>Ingenieria ambiental</option>
+                            <option>Ingenieria electronica</option>
+                            <option>Ingenieria industrial</option>
+                            <option>Ingenieria mecanica</option>
+                            <option>Mercadologia</option>
+                            <option>Publicidad</option>
+                            <option>Trabajo Social</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button>Registrar Curso</button>
+        </form>
+    </section>
+</body>
+</html>

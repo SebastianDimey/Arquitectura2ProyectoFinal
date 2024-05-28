@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Cursos</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="inicioprofesor.html">Inicio</a></li>
+      <li><a href="#">Fechas Academicas</a></li>
+      <li><a href="#">Calendario Academico</a></li>
+      <li><a href="miscursosprofesor.html">Mis Cursos</a></li>
+      <li><a href="registrarnotasprofesor.html">Registrar Notas</a></li>
+      <li><a href="/logout">Salir</a></li>
+    </ul>
+    <section class="container">
+      <header>Registrar Notas</header>
+      <form action="#" class="formulario">
+        <div class="input-box">
+          <label for="numero_documento">Número de Documento</label>
+          <input type="text" id="numero_documento" name="numero_documento" />
+        </div>
+        <button type="button" id="botonBuscar">Buscar</button>
+      </form>
+      <div id="resultadoEstudiantes" style="display: none" class="formulario">
+        <h2>Detalles del Usuario</h2>
+        <div class="columnas">
+          <!-- Campos para detalles del estudiante -->
+          <div class="input-box">
+            <label>Nombre</label>
+            <input type="text" id="nombre" readonly />
+          </div>
+          <div class="input-box">
+            <label>Apellido</label>
+            <input type="text" id="apellido" readonly />
+          </div>
+          <div class="input-box">
+            <label>Correo</label>
+            <input type="text" id="username" readonly />
+          </div>
+          <div class="input-box">
+            <label>Numero de Documento</label>
+            <input type="text" id="documento" readonly />
+          </div>
+          <div class="input-box">
+            <label>Programa</label>
+            <input type="text" id="programa" readonly />
+          </div>
+          <div class="input-box">
+            <label>Corte #1</label>
+            <input type="text" id="corte_1" />
+          </div>
+          <div class="input-box">
+            <label>Corte #2</label>
+            <input type="text" id="corte_2" />
+          </div>
+          <div class="input-box">
+            <label>Corte #3</label>
+            <input type="text" id="corte_3" />
+          </div>
+          <button type="button" id="botonActualizar">Actualizar</button>
+          <button type="button" id="botonCerrar">Cerrar</button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("botonBuscar")
+        .addEventListener("click", function () {
+          var numero_documento =
+            document.getElementById("numero_documento").value;
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", "/obtenerEstudiante/" + numero_documento, true);
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+              if (xhr.status == 200) {
+                var estudiante = JSON.parse(xhr.responseText).estudiante;
+                mostrarEstudiante(estudiante);
+              } else {
+                alert("Estudiante no encontrado");
+              }
+            }
+          };
+          xhr.send();
+        });
+
+      function mostrarEstudiante(estudiante) {
+        document.getElementById("nombre").value = estudiante.nombre;
+        document.getElementById("apellido").value = estudiante.apellido;
+        document.getElementById("username").value = estudiante.username;
+        document.getElementById("documento").value =
+          estudiante.numero_documento;
+        document.getElementById("programa").value = estudiante.programa;
+        document.getElementById("corte_1").value = estudiante.corte_1 || "";
+        document.getElementById("corte_2").value = estudiante.corte_2 || "";
+        document.getElementById("corte_3").value = estudiante.corte_3 || "";
+        document.getElementById("resultadoEstudiantes").style.display = "block";
+      }
+
+      document
+        .getElementById("botonCerrar")
+        .addEventListener("click", function () {
+          document.getElementById("resultadoEstudiantes").style.display =
+            "none";
+        });
+
+      document
+        .getElementById("botonActualizar")
+        .addEventListener("click", function () {
+          // Aquí puedes agregar el código para enviar la solicitud de actualización al servidor
+          
+        });
+        document.getElementById("botonActualizar").addEventListener("click", function () {
+    // Obtener los valores de los campos del estudiante
+    var nombre = document.getElementById("nombre").value;
+    var apellido = document.getElementById("apellido").value;
+    var username = document.getElementById("username").value;
+    var numero_documento = document.getElementById("documento").value;
+    var programa = document.getElementById("programa").value;
+    var corte_1 = document.getElementById("corte_1").value;
+    var corte_2 = document.getElementById("corte_2").value;
+    var corte_3 = document.getElementById("corte_3").value;
+
+    // Crear un objeto con los datos del estudiante
+    var estudiante = {
+        nombre: nombre,
+        apellido: apellido,
+        username: username,
+        numero_documento: numero_documento,
+        programa: programa,
+        corte_1: corte_1,
+        corte_2: corte_2,
+        corte_3: corte_3
+    };
+
+    // Enviar una solicitud AJAX para actualizar el estudiante en el servidor
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", "/actualizarEstudiante/" + numero_documento, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                alert("Estudiante actualizado correctamente");
+            } else {
+                alert("Error al actualizar el estudiante");
+            }
+        }
+    };
+    xhr.send(JSON.stringify(estudiante));
+});
+    </script>
+  </body>
+</html>

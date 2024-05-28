@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administracion de Cursos</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li><a href="inicioadmin.html">Inicio</a></li>
+      <li><a href="registroacademico.html">Registro Academico </a></li>
+      <li><a href="administracioncursos.html">Administracion de Cursos</a></li>
+      <li>
+        <a href="administracioncuentas.html">Administracion de Cuentas</a>
+      </li>
+      <li><a href="/logout">Salir</a></li>
+      <!-- Agregamos el enlace de logout -->
+    </ul>
+
+    <section class="container">
+      <header>Registro de curso</header>
+      <form action="/registrocurso" method="POST" class="formulario">
+        <div class="input-box">
+          <label>Id curso</label>
+          <input type="text" placeholder="curso id" name="id_curso" />
+        </div>
+        <div class="input-box">
+          <label>Nombre Curso</label>
+          <input
+            type="text"
+            placeholder="Escriba el nombre del curso"
+            name="nombre_curso"
+            required
+          />
+        </div>
+        <button type="button" onclick="traerProfesores()">
+          Traer Profesores
+        </button>
+        <div class="input-box">
+          <label>Docente a cargo</label>
+          <div class="select-box">
+            <select name="docente" id="docente">
+              <option hidden>Docente a cargo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Creditos</label>
+            <input
+              type="number"
+              placeholder="Esgrese el numero de creditos"
+              name="creditos"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Programa</label>
+            <div class="select-box">
+              <select name="programa">
+                <option hidden>Programa</option>
+                <option>Administracion de empresas</option>
+                <option>Biologia</option>
+                <option>Cine</option>
+                <option>comunicacion social y periodismo</option>
+                <option>Contaduria publica</option>
+                <option>Creacion literaria</option>
+                <option>Derecho</option>
+                <option>Economia</option>
+                <option>Estudios musicales</option>
+                <option>Ingenieria de sistemas</option>
+                <option>Ingenieria ambiental</option>
+                <option>Ingenieria electronica</option>
+                <option>Ingenieria industrial</option>
+                <option>Ingenieria mecanica</option>
+                <option>Mercadologia</option>
+                <option>Publicidad</option>
+                <option>Trabajo Social</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-box">
+          <label>Semestre</label>
+          <div class="select-box">
+            <select name="semestre">
+              <option hidden>Semestre</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit">>Registrar Curso</button>
+      </form>
+    </section>
+
+    <script>
+      // Función para traer los profesores
+      function traerProfesores() {
+        $.get("/traerprofe", function (data, status) {
+          // Manejo de la respuesta
+          if (status === "success") {
+            // Actualizar el select con los profesores obtenidos
+            $("#docente").empty();
+            $.each(data.profesores, function (index, profesor) {
+              $("#docente").append(
+                $("<option>", {
+                  value: profesor.numero_documento,
+                  text: `${profesor.nombre} ${profesor.apellidos} ${profesor.numero_documento}`,
+                })
+              );
+            });
+          } else {
+            console.error("Error al obtener los profesores:", status);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

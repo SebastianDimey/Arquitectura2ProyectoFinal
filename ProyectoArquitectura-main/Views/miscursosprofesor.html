@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Cursos</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="inicioprofesor.html">Inicio</a></li>
+      <li><a href="#">Fechas Academicas</a></li>
+      <li><a href="#">Calendario Academico</a></li>
+      <li><a href="miscursosprofesor.html">Mis Cursos</a></li>
+      <li><a href="registrarnotasprofesor.html">Registrar Notas</a></li>
+      <li><a href="/logout">Salir</a></li>
+    </ul>
+
+    <section class="container">
+      <header>Mis Cursos</header>
+      <div id="course-list">
+        <!-- Los detalles de cada curso se añadirán aquí dinámicamente -->
+      </div>
+    </section>
+
+    <script>
+      // Fetch courses associated with the logged-in professor
+      fetch("/miscursosprofesor")
+        .then((response) => response.json())
+        .then((data) => {
+          const courseList = document.getElementById("course-list");
+          if (data.courses && data.courses.length > 0) {
+            data.courses.forEach((course) => {
+              const courseDetailsDiv = document.createElement("div");
+              courseDetailsDiv.classList.add("course-details");
+              courseDetailsDiv.innerHTML = `
+                    <h2>Detalles del Curso</h2>
+                    <div class="columnas">
+                        <input type="hidden" id="cursoId" value="${course.id}" readonly>
+                        <div class="input-box">
+                            <label>Nombre del Curso</label>
+                            <input type="text" id="cursoNombre" value="${course.nombre_curso}" readonly>
+                        </div>
+                        <div class="input-box">
+                            <label>Docente</label>
+                            <input type="text" id="cursoDocente" value="${course.docente}" readonly>
+                        </div>
+                        <div class="input-box">
+                            <label>Créditos</label>
+                            <input type="number" id="cursoCreditos" value="${course.creditos}" readonly>
+                        </div>
+                        <div class="input-box">
+                            <label>Programa</label>
+                            <input type="text" id="cursoPrograma" value="${course.programa}" readonly>
+                        </div>
+                        <div class="input-box">
+                            <label>Semestre</label>
+                            <input type="text" id="cursoSemestre" value="${course.semestre}" readonly>
+                        </div>
+                    </div>
+                `;
+              courseList.appendChild(courseDetailsDiv);
+            });
+          } else {
+            courseList.innerHTML = "<p>No tienes cursos asignados.</p>";
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching courses:", error);
+        });
+    </script>
+  </body>
+</html>

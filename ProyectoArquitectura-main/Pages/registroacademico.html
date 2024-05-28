@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Academico</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css">
+</head>
+<body>
+    <ul>
+        <li><a href="inicioadmin.html">Inicio</a></li>
+        <li><a href="#">Fechas Academicas</a></li>
+        <li><a href="#">Calendario Academico</a></li>
+        <li><a href="registroacademico.html">Registro Academico </a></li>
+        <li><a href="administracioncursos.html">Administracion de Cursos</a></li>
+        <li><a href="administracioncuentas.html">Administracion de Cuentas</a></li>
+    </ul>
+
+
+    <section class="container">
+        <header>Formulario De Registro</header>
+        <form action="#" class="formulario">
+            <div class="input-box">
+                <label>Nombre Completo</label>
+                <input type="text" placeholder="Escriba su nombre completo" required>
+            </div>
+            <div class="input-box">
+                <label>Apellidos</label>
+                <input type="text" placeholder="Escriba sus Apellidos" required>
+            </div>
+
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Tipo de documento:</label>
+                    <div class="select-box">
+                        <select>
+                            <option hidden>Tipo de documento</option>
+                            <option>CC</option>
+                            <option>TI</option>
+                            <option>CE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Numero de documento</label>
+                    <input type="number" placeholder="Escriba el numero de documento" required>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>Cargo</label>
+                <div class="select-box">
+                    <select>
+                        <option hidden>Cargo</option>
+                        <option>Estudiante</option>
+                        <option>Profesor</option>
+                        <option>Administrativo</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Correo</label>
+                    <input type="text" placeholder="Escriba su Correo" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Telefono</label>
+                    <input type="number" placeholder="Escriba su Telefono" required>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Dirrecion</label>
+                    <input type="text" placeholder="Escriba su Dirrecion" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Programa</label>
+                    <div class="select-box">
+                        <select>
+                            <option hidden>Programa</option>
+                            <option>Administracion de empresas</option>
+                            <option>Biologia</option>
+                            <option>Cine</option>
+                            <option>comunicacion social y periodismo</option>
+                            <option>Contaduria publica</option>
+                            <option>Creacion literaria</option>
+                            <option>Derecho</option>
+                            <option>Economia</option>
+                            <option>Estudios musicales</option>
+                            <option>Ingenieria de sistemas</option>
+                            <option>Ingenieria ambiental</option>
+                            <option>Ingenieria electronica</option>
+                            <option>Ingenieria industrial</option>
+                            <option>Ingenieria mecanica</option>
+                            <option>Mercadologia</option>
+                            <option>Publicidad</option>
+                            <option>Trabajo Social</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <button>Registrar</button>
+        </form>
+    </section>
+
+</body>
+</html>

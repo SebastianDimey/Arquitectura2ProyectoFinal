@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administracion de Cuentas</title>
+    <link rel="stylesheet" href="../Styles/styleadmin.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="inicioadmin.html">Inicio</a></li>
+      <li><a href="registroacademico.html">Registro Academico</a></li>
+      <li><a href="administracioncursos.html">Administracion de Cursos</a></li>
+      <li>
+        <a href="administracioncuentas.html">Administracion de Cuentas</a>
+      </li>
+      <li><a href="/logout">Salir</a></li>
+      <!-- Agregamos el enlace de logout -->
+    </ul>
+
+    <section class="container">
+      <header>Administrar cuentas</header>
+      <form action="#" class="formulario">
+        <div class="column">
+          <div class="input-box">
+            <label>Buscar por</label>
+            <div class="select-box">
+              <select id="tipoBusqueda">
+                <option hidden>Escoja el Perfil</option>
+                <option value="curso">Curso</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-box">
+            <label id="labelId">Id</label>
+            <input
+              type="number"
+              id="idBusqueda"
+              placeholder="Ingrese el ID"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="button" id="botonBuscar">Buscar</button>
+
+        <div id="resultadoCursos" style="display: none" class="formulario">
+          <h2>Detalles del Curso</h2>
+          <div class="columnas">
+            <!-- Campos para detalles del curso -->
+            <input type="hidden" id="cursoId" readonly />
+            <div class="input-box">
+              <label>Nombre del Curso</label>
+              <input type="text" id="cursoNombre" />
+            </div>
+            <div class="input-box">
+              <label>Docente</label>
+              <input type="text" id="cursoDocente" />
+            </div>
+            <div class="input-box">
+              <label>Créditos</label>
+              <input type="number" id="cursoCreditos" />
+            </div>
+            <div class="input-box">
+              <label>Programa</label>
+              <input type="text" id="cursoPrograma" />
+            </div>
+            <div class="input-box">
+              <label>Semestre</label>
+              <input type="text" id="cursoSemestre" />
+            </div>
+          </div>
+          <button type="button" id="actualizar">Actualizar</button>
+          <button type="button" id="eliminar">Eliminar</button>
+        </div>
+
+        <div id="resultadoUsuarios" style="display: none" class="formulario">
+          <h2>Detalles del Usuario</h2>
+          <div class="columnas">
+            <!-- Campos para detalles del usuario -->
+            <input type="hidden" id="userId" />
+            <div class="input-box">
+              <label>Nombre</label>
+              <input type="text" id="userName" />
+            </div>
+            <div class="input-box">
+              <label>Apellidos</label>
+              <input type="text" id="userApellidos" />
+            </div>
+            <div class="input-box">
+              <label>Tipo de Documento</label>
+              <input type="text" id="userTipoDocumento" />
+            </div>
+            <div class="input-box">
+              <label>Número de Documento</label>
+              <input type="text" id="userNumeroDocumento" readonly />
+            </div>
+            <div class="input-box">
+              <label>Cargo</label>
+              <input type="text" id="userCargo" />
+            </div>
+            <div class="input-box">
+              <label>Correo</label>
+              <input type="email" id="userCorreo" readonly />
+            </div>
+            <div class="input-box">
+              <label>Teléfono</label>
+              <input type="tel" id="userTelefono" />
+            </div>
+            <div class="input-box">
+              <label>Dirección</label>
+              <input type="text" id="userDireccion" />
+            </div>
+            <div class="input-box">
+              <label>Programa</label>
+              <input type="text" id="userPrograma" />
+            </div>
+          </div>
+          <button type="button" id="actualizarUsuario">Actualizar</button>
+          <button type="button" id="eliminarUsuario">Eliminar</button>
+        </div>
+      </form>
+    </section>
+
+    <script>
+      document
+        .getElementById("botonBuscar")
+        .addEventListener("click", function () {
+          var tipo = document.getElementById("tipoBusqueda").value;
+          var id = document.getElementById("idBusqueda").value;
+
+          fetch(`/buscar?type=${tipo}&id=${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              if (tipo === "curso") {
+                document.getElementById("resultadoCursos").style.display =
+                  "block";
+                document.getElementById("resultadoUsuarios").style.display =
+                  "none";
+
+                document.getElementById("cursoId").value = data.id_curso;
+                document.getElementById("cursoNombre").value =
+                  data.nombre_curso;
+                document.getElementById("cursoDocente").value = data.docente;
+                document.getElementById("cursoCreditos").value = data.creditos;
+                document.getElementById("cursoPrograma").value = data.programa;
+                document.getElementById("cursoSemestre").value = data.semestre;
+              } else {
+                document.getElementById("resultadoCursos").style.display =
+                  "none";
+                document.getElementById("resultadoUsuarios").style.display =
+                  "block";
+
+                document.getElementById("userId").value = data.id;
+                document.getElementById("userName").value = data.nombre;
+                document.getElementById("userApellidos").value = data.apellidos;
+                document.getElementById("userTipoDocumento").value =
+                  data.tipo_documento;
+                document.getElementById("userNumeroDocumento").value =
+                  data.numero_documento;
+                document.getElementById("userCargo").value = data.cargo;
+                document.getElementById("userCorreo").value = data.correo;
+                document.getElementById("userTelefono").value = data.telefono;
+                document.getElementById("userDireccion").value = data.direccion;
+                document.getElementById("userPrograma").value = data.programa;
+              }
+            })
+            .catch((error) => console.error("Error al buscar:", error));
+        });
+
+      document
+        .getElementById("eliminar")
+        .addEventListener("click", function () {
+          var idCurso = document.getElementById("cursoId").value;
+
+          fetch(`/eliminarCurso?id=${idCurso}`, { method: "DELETE" })
+            .then((response) => {
+              if (response.ok) {
+                ocultarCamposCurso();
+                console.log("Curso eliminado correctamente");
+                // Aquí puedes realizar otras acciones necesarias después de la eliminación
+              } else {
+                console.error("Error al eliminar el curso");
+              }
+            })
+            .catch((error) =>
+              console.error("Error al eliminar el curso:", error)
+            );
+        });
+
+      document
+        .getElementById("actualizar")
+        .addEventListener("click", function () {
+          var id = document.getElementById("cursoId").value;
+          var nombreCurso = document.getElementById("cursoNombre").value;
+          var docente = document.getElementById("cursoDocente").value;
+          var creditos = document.getElementById("cursoCreditos").value;
+          var programa = document.getElementById("cursoPrograma").value;
+          var semestre = document.getElementById("cursoSemestre").value;
+
+          fetch(`/actualizarCurso`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id,
+              nombreCurso,
+              docente,
+              creditos,
+              programa,
+              semestre,
+            }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                ocultarCamposCurso();
+                console.log("Curso actualizado correctamente");
+                // Aquí puedes realizar otras acciones necesarias después de la actualización
+              } else {
+                console.error("Error al actualizar el curso");
+              }
+            })
+            .catch((error) =>
+              console.error("Error al actualizar el curso:", error)
+            );
+        });
+
+      document
+        .getElementById("eliminarUsuario")
+        .addEventListener("click", function () {
+          var idUsuario = document.getElementById("userId").value;
+
+          fetch(`/eliminarUsuario?id=${idUsuario}`, { method: "DELETE" })
+            .then((response) => {
+              if (response.ok) {
+                ocultarCampos();
+                console.log("Usuario eliminado correctamente");
+                // Aquí puedes realizar otras acciones necesarias después de la eliminación
+              } else {
+                console.error("Error al eliminar el usuario");
+              }
+            })
+            .catch((error) =>
+              console.error("Error al eliminar el usuario:", error)
+            );
+        });
+
+      document
+        .getElementById("actualizarUsuario")
+        .addEventListener("click", function () {
+          var id = document.getElementById("userId").value;
+          var nombreUsuario = document.getElementById("userName").value;
+          var apellidos = document.getElementById("userApellidos").value;
+          var tipoDocumento =
+            document.getElementById("userTipoDocumento").value;
+          var numeroDocumento = document.getElementById(
+            "userNumeroDocumento"
+          ).value;
+          var cargo = document.getElementById("userCargo").value;
+          var correo = document.getElementById("userCorreo").value;
+          var telefono = document.getElementById("userTelefono").value;
+          var direccion = document.getElementById("userDireccion").value;
+          var programa = document.getElementById("userPrograma").value;
+
+          fetch(`/actualizarUsuario`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id,
+              nombreUsuario,
+              apellidos,
+              tipoDocumento,
+              numeroDocumento,
+              cargo,
+              correo,
+              telefono,
+              direccion,
+              programa,
+            }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Usuario actualizado correctamente");
+                // Ocultar los campos después de una actualización exitosa
+                ocultarCampos();
+                // Aquí puedes realizar otras acciones necesarias después de la actualización
+              } else {
+                console.error("Error al actualizar el usuario");
+              }
+            })
+            .catch((error) =>
+              console.error("Error al actualizar el usuario:", error)
+            );
+        });
+
+      function ocultarCamposCurso() {
+        document.getElementById("resultadoCursos").style.display = "none";
+      }
+
+      function ocultarCampos() {
+        document.getElementById("resultadoUsuarios").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

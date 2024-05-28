@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InicioDeSesion</title>
+    <link rel="stylesheet" href="../Styles/style1.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <img src="../Images/darkicon.png" alt="iconoCentral" width="100%" />
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm" action="/login" method="POST">
+          <div class="username">
+            <label for="username">Nombre de usuario:</label><br />
+            <input type="text" required id="username" name="username" /><br />
+          </div>
+          <div class="username">
+            <label for="password">Contraseña:</label><br />
+            <input
+              type="password"
+              required
+              id="password"
+              name="password"
+            /><br />
+          </div>
+          <br />
+          <input type="submit" value="Iniciar Sesión" /><br />
+          <div class="registrarse">
+            <br />
+            Quiero hacer el <a href="registro">registro</a>
+          </div>
+        </form>
+      </div>
+      <div class="image-container">
+        <img src="../Images/ucentralcampus.jpg" alt="Imagen de fondo" />
+      </div>
+    </div>
+  </body>
+</html>

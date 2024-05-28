@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="../Styles/styler.css" />
+  </head>
+  <body>
+    <section class="container">
+      <header>Formulario De Registro</header>
+      <form action="#" class="formulario">
+        <div class="input-box">
+          <label>Nombre Completo</label>
+          <input
+            type="text"
+            placeholder="Escriba su nombre completo"
+            required
+          />
+        </div>
+        <div class="input-box">
+          <label>Apellidos</label>
+          <input type="text" placeholder="Escriba sus Apellidos" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Correo</label>
+            <input type="text" placeholder="Escriba su Correo" required />
+          </div>
+
+          <div class="input-box">
+            <label>Telefono</label>
+            <input type="number" placeholder="Escriba su Telefono" required />
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Dirección</label>
+            <input type="text" placeholder="Escriba su Dirección" required />
+          </div>
+
+          <div class="input-box">
+            <label>Programa</label>
+            <div class="select-box">
+              <select>
+                <option hidden>Programa</option>
+                <option>Ingeniería de sistemas</option>
+                <option>Ingeniería ambiental</option>
+                <option>Ingeniería electrónica</option>
+                <option>Ingeniería industrial</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Registrar</button>
+        <button type="button" onclick="goToLogin()">Regresar</button>
+      </form>
+    </section>
+
+    <script>
+      function goToLogin() {
+        window.location.href = "http://localhost:3000/login";
+      }
+    </script>
+  </body>
+</html>
